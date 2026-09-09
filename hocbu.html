@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#3b5bdb" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<title>MIHU ART — Đăng ký học bù</title>
+<!-- Open Graph: Zalo / Facebook / iMessage đọc các thẻ này để dựng khung xem trước.
+     Ảnh BẮT BUỘC là URL tuyệt đối (https://...), đường dẫn tương đối sẽ không hiện.
+     Đổi tên file ảnh (og-hocbu-v2.png...) mỗi khi thay banner, vì Zalo cache ảnh
+     theo URL và giữ rất lâu. -->
+<meta property="og:type"        content="website" />
+<meta property="og:site_name"   content="MIHU ART" />
+<meta property="og:title"       content="MIHU ART — Đăng ký học bù" />
+<meta property="og:description" content="Xem lớp còn chỗ và chọn buổi học bù cho con, không cần nhắn Zalo qua lại." />
+<meta property="og:image"       content="https://mihuart.vercel.app/og-hocbu.png" />
+<meta property="og:image:width"  content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url"         content="https://mihuart.vercel.app/hocbu.html" />
+<meta property="og:locale"      content="vi_VN" />
+<meta name="twitter:card"        content="summary_large_image" />
+<meta name="twitter:title"       content="MIHU ART — Đăng ký học bù" />
+<meta name="twitter:description" content="Xem lớp còn chỗ và chọn buổi học bù cho con, không cần nhắn Zalo qua lại." />
+<meta name="twitter:image"       content="https://mihuart.vercel.app/og-hocbu.png" />
+<meta name="description"        content="Trang đăng ký học bù dành cho phụ huynh MIHU ART." />
+
+<!-- BUILD 2026-09-09n -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f2f3f7; --surface:#ffffff; --border:#e6e8ee;
+    --text:#151823; --text-muted:#6b7280; --text-faint:#8a8f9c;
+    --accent:#3b5bdb; --accent-soft:#eef1fd;
+    --green:#1a9c6b; --green-soft:#e8f7f1;
+    --amber:#a5680a; --amber-soft:#fdf3e4;
+    --red:#d13c3c; --red-soft:#fceaea;
+    --violet:#7c5cd6; --violet-soft:#f1edfb;
+    --radius:12px;
+    --shadow:0 1px 2px rgba(20,22,35,.04),0 1px 8px rgba(20,22,35,.03);
+    --safe-b:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);
+    font-family:"Be Vietnam Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;
+    padding-bottom:calc(90px + var(--safe-b));}
+  .wrap{max-width:560px;margin:0 auto;padding:0 14px;}
+  button{font:inherit;cursor:pointer;}
+  .hide{display:none !important;}
+
+  header{background:var(--surface);border-bottom:1px solid var(--border);
+    padding:calc(13px + env(safe-area-inset-top,0px)) 0 0;position:sticky;top:0;z-index:20;}
+  .hd{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .brand{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.02em;}
+  .hd-name{font-size:18px;font-weight:700;letter-spacing:-.01em;margin-top:2px;}
+  .hd-sub{font-size:11.5px;color:var(--text-muted);margin-top:1px;}
+  .hd-code{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;
+    background:var(--accent-soft);color:var(--accent);padding:6px 9px;border-radius:8px;white-space:nowrap;}
+
+  .sec{margin-top:18px;}
+  .sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:9px;}
+  .sec-t{font-size:15px;font-weight:700;letter-spacing:-.01em;}
+  .sec-n{font-size:12px;color:var(--text-muted);}
+  .card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:13px;margin-bottom:9px;}
+
+  .ab{width:100%;text-align:left;display:block;transition:border-color .12s,background .12s;}
+  .ab:focus-visible{outline:2.5px solid var(--accent);outline-offset:2px;}
+  .ab-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+  .ab-subj{font-weight:600;font-size:15px;}
+  .ab-when{font-size:12.5px;color:var(--text-muted);margin-top:2px;}
+  .ab-gv{font-size:12.5px;color:var(--text-faint);margin-top:1px;}
+  .ab-foot{margin-top:9px;padding-top:9px;border-top:1px dashed var(--border);
+    display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;}
+  .deadline{color:var(--amber);font-weight:600;}
+  .deadline.urgent{color:var(--red);}
+  .ok{color:var(--green);font-weight:600;}
+  /* "Chọn lớp bù" / "Đổi lớp" là chữ trong thẻ, không phải <button>, nên phải tự đặt
+     con trỏ bàn tay cho giống các nút khác. */
+  .pick{color:var(--accent);font-weight:600;cursor:pointer;}
+  .ab[data-open="true"]{cursor:pointer;}
+  .ab [data-cancel]{cursor:pointer;}
+
+  .tag{font-size:11px;font-weight:600;padding:4px 8px;border-radius:7px;white-space:nowrap;}
+  .t-wait{background:var(--amber-soft);color:var(--amber);}
+  .t-done{background:var(--green-soft);color:var(--green);}
+  .t-seat{background:var(--green-soft);color:var(--green);}
+  .t-low{background:var(--amber-soft);color:var(--amber);}
+  .t-full{background:var(--red-soft);color:var(--red);}
+  .t-other{background:var(--violet-soft);color:var(--violet);}
+
+  .chips{display:flex;gap:7px;overflow-x:auto;padding:2px 0 4px;}
+  .chips::-webkit-scrollbar{display:none;}
+  .chip{background:var(--surface);border:1.5px solid var(--border);border-radius:999px;
+    padding:7px 13px;font-size:12.5px;font-weight:600;color:var(--text-muted);white-space:nowrap;}
+  .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+  .backlink{display:inline-flex;align-items:center;gap:5px;background:none;border:none;
+    padding:2px 0 10px;font-size:13.5px;font-weight:600;color:var(--accent);}
+  .backlink:focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:6px;}
+
+  .tabs{display:flex;gap:22px;margin-top:12px;}
+  .tabbtn{background:none;border:none;padding:9px 0 11px;font-size:14px;font-weight:600;
+    color:var(--text-muted);border-bottom:2.5px solid transparent;}
+  .tabbtn[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent);}
+  .tabbtn .dot{display:inline-block;min-width:18px;height:18px;line-height:18px;border-radius:9px;
+    background:var(--amber-soft);color:var(--amber);font-size:11px;margin-left:5px;padding:0 5px;}
+  .quota{border-radius:var(--radius);padding:11px 13px;font-size:13px;font-weight:600;
+    background:var(--accent-soft);color:var(--accent);margin-bottom:14px;}
+  .quota.low{background:var(--amber-soft);color:var(--amber);}
+  .rangebox{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:13px;margin-bottom:12px;}
+  .rangerow{display:flex;gap:10px;}
+  .rangerow label{flex:1;font-size:11.5px;font-weight:600;color:var(--text-muted);
+    display:flex;flex-direction:column;gap:5px;}
+  .rangerow input{border:1.5px solid var(--border);border-radius:10px;padding:10px 11px;
+    font:inherit;font-size:16px;background:var(--surface);color:var(--text);width:100%;}
+  .rangerow input:focus{outline:none;border-color:var(--accent);}
+  .quickrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px;}
+  .btn-sm{background:var(--surface);border:1.5px solid var(--border);border-radius:9px;
+    padding:7px 13px;font-size:12.5px;font-weight:600;color:var(--accent);white-space:nowrap;}
+  .btn-sm.warn{color:var(--amber);border-color:#f0dcb8;}
+  .btn-sm.mute{color:var(--text-muted);}
+  .ses-foot{margin-top:10px;padding-top:10px;border-top:1px dashed var(--border);
+    display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12.5px;}
+  .mask{position:fixed;inset:0;background:rgba(10,12,20,.45);z-index:40;opacity:0;
+    pointer-events:none;transition:opacity .2s;}
+  .mask.on{opacity:1;pointer-events:auto;}
+  .sheet{position:fixed;left:0;right:0;bottom:0;z-index:50;background:var(--surface);
+    border-radius:18px 18px 0 0;padding:18px 16px calc(18px + var(--safe-b));
+    transform:translateY(102%);transition:transform .24s ease;max-width:560px;margin:0 auto;}
+  .sheet.on{transform:translateY(0);}
+  .sheet{max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+  /* Khoá cuộn trang nền khi bảng đang mở. iOS Safari bỏ qua overflow:hidden trên body
+     nên phải ghim body bằng position:fixed rồi trả lại đúng vị trí cũ khi đóng. */
+  body.sheet-open{position:fixed;left:0;right:0;width:100%;overflow:hidden;}
+  .sheet h3{margin:0 0 3px;font-size:17px;}
+  .sheet .shsub{font-size:12.5px;color:var(--text-muted);margin-bottom:14px;}
+  .reasons{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
+  .reason{background:var(--surface);border:1.5px solid var(--border);border-radius:999px;
+    padding:8px 14px;font-size:13px;font-weight:600;color:var(--text-muted);}
+  .reason[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff;}
+  /* iOS Safari tự phóng to trang khi focus vào ô nhập có cỡ chữ < 16px.
+     Giữ đúng 16px cho mọi input/textarea là hết zoom, không cần khoá thu phóng. */
+  .sheet textarea{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:11px;
+    font:inherit;font-size:16px;resize:none;height:80px;}
+  .sheet textarea:focus{outline:none;border-color:var(--accent);}
+  .impact{border-radius:10px;padding:11px 13px;font-size:13px;margin:12px 0;line-height:1.45;}
+  .impact.ok{background:var(--green-soft);color:#0f7a52;}
+  .impact.bad{background:var(--red-soft);color:#a72d2d;}
+  .btn-full{width:100%;}
+  .daylabel{font-size:12px;font-weight:700;color:var(--text-muted);margin:15px 0 7px;}
+  .slot{width:100%;text-align:left;display:flex;gap:12px;align-items:center;}
+  .slot:focus-visible{outline:2.5px solid var(--accent);outline-offset:2px;}
+  .slot.sel{border-color:var(--accent);}
+  .slot-time{font-family:"IBM Plex Mono",monospace;font-size:15px;font-weight:600;min-width:52px;}
+  .slot-dur{font-size:11px;color:var(--text-faint);font-weight:500;margin-top:1px;}
+  .slot-body{flex:1;min-width:0;}
+  .slot-t{font-weight:600;font-size:14.5px;}
+  .slot-m{font-size:12.5px;color:var(--text-muted);margin-top:2px;}
+  .slot-addr{font-size:11.5px;color:var(--text-faint);margin-top:3px;}
+
+  details.rules{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);
+    padding:12px 13px;margin-top:16px;}
+  details.rules summary{font-size:13.5px;font-weight:600;cursor:pointer;list-style:none;
+    display:flex;justify-content:space-between;align-items:center;}
+  details.rules summary::-webkit-details-marker{display:none;}
+  details.rules summary::after{content:"+";color:var(--text-muted);font-size:17px;line-height:1;}
+  details.rules[open] summary::after{content:"–";}
+  details.rules ul{margin:10px 0 0;padding-left:17px;font-size:13px;color:var(--text-muted);}
+  details.rules li{margin-bottom:5px;}
+
+  .bar{position:fixed;left:0;right:0;bottom:0;background:var(--surface);
+    border-top:1px solid var(--border);padding:11px 14px calc(11px + var(--safe-b));z-index:30;
+    transform:translateY(105%);transition:transform .22s ease;}
+  .bar.on{transform:translateY(0);}
+  .bar-in{max-width:560px;margin:0 auto;display:flex;align-items:center;gap:12px;}
+  .bar-txt{flex:1;min-width:0;}
+  .bar-t{font-size:13.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .bar-s{font-size:12px;color:var(--text-muted);}
+  .btn{background:var(--accent);color:#fff;border:none;border-radius:10px;
+    padding:12px 18px;font-size:14.5px;font-weight:600;white-space:nowrap;}
+  .btn[disabled]{opacity:.6;}
+  .btn-ghost{background:var(--surface);color:var(--text-muted);border:1.5px solid var(--border);}
+
+  .done-card{border-color:var(--green);background:var(--green-soft);}
+  .done-h{display:flex;align-items:center;gap:9px;font-weight:700;color:var(--green);font-size:15px;}
+  .done-row{display:flex;justify-content:space-between;gap:12px;font-size:13.5px;padding:7px 0;
+    border-bottom:1px dashed rgba(26,156,107,.28);}
+  .done-row:last-of-type{border-bottom:none;}
+  .done-row span:first-child{color:var(--text-muted);}
+  .done-row span:last-child{font-weight:600;text-align:right;}
+
+  .empty{text-align:center;padding:34px 18px;}
+  .empty-t{font-weight:700;font-size:16px;}
+  .empty-s{font-size:13.5px;color:var(--text-muted);margin-top:6px;}
+  .toast{position:fixed;left:14px;right:14px;bottom:calc(80px + var(--safe-b));z-index:50;
+    background:#151823;color:#fff;border-radius:10px;padding:12px 14px;font-size:13.5px;
+    max-width:532px;margin:0 auto;opacity:0;transform:translateY(8px);
+    transition:opacity .18s,transform .18s;pointer-events:none;}
+  .toast.on{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+   <div class="hd">
+    <div>
+      <div class="brand">MIHU ART</div>
+      <div class="hd-name" id="stName">Đang tải…</div>
+      <div class="hd-sub" id="stSub">Đăng ký học bù</div>
+    </div>
+    <div class="hd-code hide" id="stCode"></div>
+   </div>
+   <div class="tabs hide" id="tabs">
+     <button class="tabbtn" aria-selected="true" data-tab="bu">Buổi nghỉ &amp; bù <span class="dot hide" id="buCount"></span></button>
+     <button class="tabbtn" aria-selected="false" data-tab="nghi">Xin nghỉ</button>
+     <button class="tabbtn" aria-selected="false" data-tab="pa">Phản ánh</button>
+   </div>
+   <div id="switchBar" class="hide" style="padding:9px 0 11px;border-top:1px solid var(--border);">
+     <div style="font-size:11.5px;color:var(--text-muted);margin-bottom:6px;">Bé còn học ở cơ sở khác</div>
+     <div id="switchList" class="chips"></div>
+   </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- Danh sách buổi nghỉ -->
+  <section class="sec hide" id="step1">
+    <div class="sec-h">
+      <div class="sec-t">Buổi nghỉ và buổi bù</div>
+      <div class="sec-n" id="absCount"></div>
+    </div>
+    <div id="absList"></div>
+    <details class="rules">
+      <summary>Quy định học bù</summary>
+      <ul>
+        <li>Báo nghỉ trước giờ học ít nhất 24 giờ mới được xếp bù.</li>
+        <li>Buổi bù phải học trong vòng 7 ngày kể từ buổi nghỉ.</li>
+        <li>Nếu trong 7 ngày không còn lớp phù hợp, trung tâm tự gia hạn thêm 7 ngày và báo lại cho phụ huynh. Mỗi buổi nghỉ chỉ gia hạn một lần.</li>
+        <li>Lớp nhóm chỉ nhận bù khi còn chỗ trống.</li>
+        <li>Sau khi chọn lớp, giáo vụ sẽ xác nhận lại. Muốn đổi lớp thì thực hiện trước ngày học.</li>
+      </ul>
+    </details>
+  </section>
+
+  <!-- Chọn lớp bù -->
+  <section class="sec hide" id="step2">
+    <button class="backlink" id="backTop">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M10 3.5L5.5 8l4.5 4.5" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Quay lại buổi nghỉ
+    </button>
+    <div class="sec-h">
+      <div>
+        <div class="sec-t" id="s2Title">Chọn lớp học bù</div>
+        <div class="sec-n" id="s2Sub"></div>
+      </div>
+    </div>
+    <div class="chips" id="filters">
+      <button class="chip" aria-pressed="true" data-f="all">Tất cả</button>
+      <button class="chip" aria-pressed="false" data-f="near">Cùng cơ sở</button>
+      <button class="chip" aria-pressed="false" data-f="eve">Sau 17:00</button>
+      <button class="chip" aria-pressed="false" data-f="wknd">Cuối tuần</button>
+    </div>
+    <div id="slotList"></div>
+    <button class="btn btn-ghost" id="moreSlots" style="width:100%;margin-top:10px;">Xem thêm lớp</button>
+    <button class="btn btn-ghost" id="backBtn" style="width:100%;margin-top:10px;">Quay lại</button>
+  </section>
+
+  <!-- Xác nhận -->
+  <section class="sec hide" id="step3">
+    <div class="card done-card">
+      <div class="done-h">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="10" cy="10" r="9" fill="#1a9c6b"/>
+          <path d="M6 10.3l2.6 2.6L14 7.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Đã gửi lựa chọn lớp bù
+      </div>
+      <div style="margin-top:12px;">
+        <div class="done-row"><span>Lớp bù đã chọn</span><span id="dnWhen">—</span></div>
+        <div class="done-row"><span>Lớp</span><span id="dnClass">—</span></div>
+        <div class="done-row"><span>Giáo viên</span><span id="dnGv">—</span></div>
+        <div class="done-row"><span>Địa điểm</span><span id="dnLoc">—</span></div>
+        <div class="done-row"><span>Bù cho buổi nghỉ</span><span id="dnFor">—</span></div>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-muted);margin-top:12px;">
+        Giáo vụ và phòng đào tạo đã nhận được thông tin. Phụ huynh và các con vui lòng chờ xác nhận xếp ca từ phòng đào tạo của trung tâm.
+      </div>
+    </div>
+    <button class="btn" id="homeBtn" style="width:100%;">Về danh sách buổi nghỉ</button>
+  </section>
+
+  <!-- Không còn lớp -->
+  <section class="sec hide" id="stateEmpty">
+    <div class="card empty">
+      <div class="empty-t">Chưa có lớp bù phù hợp</div>
+      <div class="empty-s" id="emptySub">Các lớp cùng môn đều kín chỗ trong hạn bù. Nếu đến gần hạn vẫn chưa có lớp, trung tâm sẽ tự gia hạn thêm 7 ngày và báo lại cho anh/chị.</div>
+      <button class="btn btn-ghost" id="emptyBack" style="margin-top:16px;">Quay lại</button>
+    </div>
+  </section>
+
+  <!-- ===== TAB XIN NGHỈ ===== -->
+  <section class="sec hide" id="tabNghi">
+    <div class="quota" id="quotaBox">Đang tải…</div>
+    <div class="sec-h">
+      <div>
+        <div class="sec-t">Lịch học sắp tới</div>
+        <div class="sec-n">Chọn ngày hoặc khoảng thời gian con nghỉ. Báo trước 24 giờ thì được xếp học bù.</div>
+      </div>
+    </div>
+    <div class="rangebox">
+      <div class="rangerow">
+        <label>Từ ngày<input type="date" id="dateFrom" /></label>
+        <label>Đến ngày<input type="date" id="dateTo" /></label>
+      </div>
+      <div class="quickrow">
+        <button class="btn-sm" data-quick="1">Hôm nay</button>
+        <button class="btn-sm" data-quick="7">7 ngày tới</button>
+        <button class="btn-sm" data-quick="30">30 ngày tới</button>
+        <button class="btn-sm mute" id="rangeClear">Xoá</button>
+      </div>
+    </div>
+    <div id="sesList"></div>
+    <div id="myLeaves" style="margin-top:20px;"></div>
+  </section>
+
+  <!-- ===== TAB PHẢN ÁNH ===== -->
+  <section class="sec hide" id="tabPA">
+    <div class="quota" style="background:var(--violet-soft);color:var(--violet);">
+      Trung tâm phản hồi trong vòng 24 giờ kể từ khi anh/chị gửi.
+    </div>
+    <div class="sec-h">
+      <div>
+        <div class="sec-t">Gửi phản ánh về việc học của con</div>
+        <div class="sec-n">Nội dung được gửi thẳng tới ban quản lý và giáo vụ phụ trách cơ sở.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-size:13px;font-weight:600;margin-bottom:8px;">Nội dung phản ánh về</div>
+      <div class="reasons" id="paTopics">
+        <button class="reason" aria-pressed="false" data-t="Chất lượng">Chất lượng học</button>
+        <button class="reason" aria-pressed="false" data-t="Giáo viên">Giáo viên</button>
+        <button class="reason" aria-pressed="false" data-t="Lịch học">Lịch học</button>
+        <button class="reason" aria-pressed="false" data-t="Giáo vụ">Giáo vụ, chăm sóc</button>
+        <button class="reason" aria-pressed="false" data-t="Cơ sở vật chất">Cơ sở vật chất</button>
+        <button class="reason" aria-pressed="false" data-t="Khác">Khác</button>
+      </div>
+      <textarea id="paDetail" placeholder="Anh/chị mô tả cụ thể giúp em: chuyện xảy ra khi nào, ở buổi học nào, mong muốn của gia đình là gì."
+        style="width:100%;border:1.5px solid var(--border);border-radius:10px;padding:11px;
+               font:inherit;font-size:16px;resize:none;height:120px;"></textarea>
+      <div style="font-size:11.5px;color:var(--text-faint);margin-top:6px;" id="paCount">Tối thiểu 10 ký tự</div>
+      <button class="btn btn-full" id="paSend" style="margin-top:12px;">Gửi phản ánh</button>
+    </div>
+    <div id="paList" style="margin-top:20px;"></div>
+  </section>
+
+  <!-- Link hỏng -->
+  <section class="sec hide" id="stateBad">
+    <div class="card empty">
+      <div class="empty-t">Link không sử dụng được</div>
+      <div class="empty-s" id="badSub">Link này không còn hiệu lực. Anh/chị liên hệ giáo vụ để nhận link mới.</div>
+    </div>
+  </section>
+  <div style="text-align:center;font-size:11px;color:var(--text-faint);margin:22px 0 6px;">
+    MIHU ART · b2026-09-09n
+  </div>
+</main>
+
+<div class="bar" id="bar">
+  <div class="bar-in">
+    <div class="bar-txt">
+      <div class="bar-t" id="barT">—</div>
+      <div class="bar-s" id="barS">—</div>
+    </div>
+    <button class="btn" id="confirmBtn">Chọn lớp này</button>
+  </div>
+</div>
+
+<div class="mask" id="mask"></div>
+<div class="sheet" id="sheet">
+  <h3 id="shTitle">Xin nghỉ buổi này</h3>
+  <div class="shsub" id="shSub">—</div>
+  <div style="font-size:13px;font-weight:600;margin-bottom:8px;">Lý do</div>
+  <div class="reasons" id="reasons">
+    <button class="reason" aria-pressed="false" data-r="Con bị ốm">Con bị ốm</button>
+    <button class="reason" aria-pressed="false" data-r="Gia đình bận việc">Gia đình bận việc</button>
+    <button class="reason" aria-pressed="false" data-r="Đi du lịch">Đi du lịch</button>
+    <button class="reason" aria-pressed="false" data-r="Trùng lịch ở trường">Trùng lịch ở trường</button>
+    <button class="reason" aria-pressed="false" data-r="Lý do khác">Lý do khác</button>
+  </div>
+  <textarea id="shNote" placeholder="Ghi chú thêm cho giáo viên (không bắt buộc)"></textarea>
+  <div class="impact" id="shImpact">—</div>
+  <button class="btn btn-full" id="shConfirm">Xác nhận xin nghỉ</button>
+  <button class="btn btn-ghost btn-full" id="shClose" style="margin-top:9px;">Đóng</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SUPABASE_URL = "https://vuljmhejucabakqzpllj.supabase.co";
+const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ1bGptaGVqdWNhYmFrcXpwbGxqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY3NTc3NzMsImV4cCI6MjEwMjMzMzc3M30.VAwwKWg0TXzNuoUR4Lx3hdKmKWoHFBETKt9p-FKu5gs";
+const TOKEN = new URLSearchParams(location.search).get("t") || "";
+const PAGE = 12;
+
+const $ = s => document.querySelector(s);
+const step1=$("#step1"), step2=$("#step2"), step3=$("#step3");
+const stEmpty=$("#stateEmpty"), stBad=$("#stateBad"), bar=$("#bar");
+let absences=[], slots=[], shown=PAGE, filter="all", curAbs=null, curSlot=null, busy=false;
+
+async function rpc(fn, body){
+  const r = await fetch(SUPABASE_URL + "/rest/v1/rpc/" + fn, {
+    method:"POST",
+    headers:{ apikey:ANON_KEY, Authorization:"Bearer "+ANON_KEY, "Content-Type":"application/json" },
+    body: JSON.stringify(body)
+  });
+  const data = await r.json().catch(()=>null);
+  if(!r.ok){
+    const msg = (data && (data.message || data.hint)) || "LOI_KET_NOI";
+    throw new Error(msg);
+  }
+  return data;
+}
+
+const DOW=["Chủ nhật","Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7"];
+function dstr(iso){ const d=new Date(iso+"T00:00:00");
+  return DOW[d.getDay()]+", "+String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0"); }
+function hm(t){ return t? t.slice(0,5): ""; }
+function mins(a,b){ const p=x=>{const [h,m]=x.split(":").map(Number);return h*60+m;};
+  return b&&a? (p(b)-p(a))+" phút" : ""; }
+function esc(s){ return (s==null?"":String(s)).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("on");
+  setTimeout(()=>t.classList.remove("on"), 3200); }
+function show(sec){ [step1,step2,step3,stEmpty,stBad].forEach(x=>x.classList.add("hide"));
+  sec.classList.remove("hide"); bar.classList.remove("on"); window.scrollTo({top:0}); }
+
+const ERRS = {
+  LINK_KHONG_HOP_LE:"Link không còn hiệu lực. Anh/chị liên hệ giáo vụ để nhận link mới.",
+  BUOI_NGHI_KHONG_HOP_LE:"Buổi nghỉ này đã được xếp bù hoặc đã quá hạn.",
+  BUOI_NGHI_KHONG_THUOC_HOC_VIEN:"Buổi nghỉ này không thuộc về học viên.",
+  SLOT_KHONG_CON_HOP_LE:"Chỗ này vừa có phụ huynh khác đặt. Anh/chị chọn giúp em lớp khác.",
+  BUOI_BU_KHONG_HOP_LE:"Không tìm thấy buổi bù này.",
+  QUA_HAN_DOI_BUOI_BU:"Đã quá hạn đổi buổi bù, anh/chị liên hệ giáo vụ.",
+  DA_CO_BOOKING:"Buổi nghỉ này đã chọn lớp bù rồi. Anh/chị đổi lớp ở màn hình trước.",
+  DA_XEP_BU_ROI:"Buổi nghỉ này trung tâm đã xếp lớp bù rồi.",
+  THIEU_LY_DO:"Anh/chị chọn giúp em lý do nghỉ.",
+  CA_KHONG_THUOC_HOC_VIEN:"Buổi học này không nằm trong lịch của con.",
+  NGAY_NGOAI_PHAM_VI:"Chỉ xin nghỉ được cho các buổi trong vòng 30 ngày tới.",
+  BUOI_DA_CO_GHI_NHAN:"Buổi này đã được ghi nhận rồi, anh/chị tải lại trang giúp em.",
+  HET_BUOI_PHEP:"Khoá của con đã hết buổi phép.",
+  DON_NGHI_KHONG_HOP_LE:"Không tìm thấy đơn xin nghỉ này.",
+  DA_QUA_GIO_HOC:"Đã qua giờ học nên không hoàn tác được.",
+  DA_CO_BUOI_BU:"Buổi nghỉ này đã có lớp bù nên không hoàn tác được. Anh/chị liên hệ giáo vụ.",
+  QUA_HAN_HOAN_TAC:"Chỉ hoàn tác được khi còn ít nhất 24 giờ trước giờ học. Anh/chị liên hệ giáo vụ giúp em.",
+  NOI_DUNG_QUA_NGAN:"Anh/chị mô tả thêm giúp em, ít nhất 10 ký tự.",
+  THIEU_CHU_DE:"Anh/chị chọn giúp em nội dung phản ánh về việc gì.",
+  QUA_NHIEU_CASE_DANG_MO:"Con đang có 3 phản ánh chưa xử lý xong. Anh/chị chờ trung tâm giải quyết xong giúp em.",
+  VUA_GUI_XONG:"Anh/chị vừa gửi một phản ánh. Vui lòng chờ vài phút trước khi gửi tiếp."
+};
+function errText(e){
+  const raw = String((e && e.message) || "");
+  const k = Object.keys(ERRS).find(k => raw.includes(k));
+  if (k) return ERRS[k];
+  // Lỗi ngoài danh sách: kèm mã gốc để giáo vụ đọc lại được khi phụ huynh chụp màn hình
+  return "Chưa gửi được, anh/chị thử lại giúp em." + (raw ? " (" + raw.slice(0, 80) + ")" : "");
+}
+
+async function loadHome(){
+  if(!TOKEN){
+    $("#stName").textContent = "MIHU ART";
+    $("#stateBad").querySelector(".empty-t").textContent = "Thiếu mã học viên trên link";
+    $("#badSub").textContent = "Anh/chị mở đúng link giáo vụ đã gửi qua Zalo (link có đuôi ?t=...), hoặc nhắn giáo vụ gửi lại.";
+    show(stBad); return;
+  }
+  try{
+    absences = await rpc("parent_makeup_absences", { p_token: TOKEN });
+  }catch(e){
+    $("#badSub").textContent = errText(e); show(stBad); return;
+  }
+  $("#tabs").classList.remove("hide");
+  if(!absences.length){
+    $("#stName").textContent = "MIHU ART";
+    $("#badSub").textContent = "Hiện bé không có buổi nghỉ nào cần xếp bù. Khi có buổi nghỉ, anh/chị mở lại đúng link này.";
+    $("#stateBad").querySelector(".empty-t").textContent = "Không có buổi nghỉ chờ bù";
+    loadOtherRecords();
+    show(stBad); return;
+  }
+  const a0 = absences[0];
+  $("#stName").textContent = a0.student_name || "";
+  $("#stCode").textContent = a0.student_code || "";
+  $("#stCode").classList.remove("hide");
+  $("#stSub").textContent = (a0.home_location? a0.home_location+" · ":"") + "Đăng ký học bù";
+  renderAbs(); updateBadge(); loadOtherRecords(); show(step1);
+}
+
+function renderAbs(){
+  const cho = absences.filter(a=>!a.booked && a.days_left>=0);
+  $("#absCount").textContent = cho.length ? cho.length+" buổi chờ bù" : "";
+  $("#absList").innerHTML = absences.map(a=>{
+    let foot, tag;
+    if(a.booked && a.booking_state === 'da_xep'){
+      tag = '<span class="tag t-done">Đã xếp bù</span>';
+      foot = '<span class="ok">Lớp học bù: '+dstr(a.booked_date)+' · '+hm(a.booked_time)+
+             (a.booked_end_time? '-'+hm(a.booked_end_time):'')+'</span>';
+    } else if(a.booked){
+      tag = '<span class="tag t-other">Đã gửi yêu cầu</span>';
+      foot = '<span style="color:var(--violet);font-weight:600">Lớp dự kiến học Bù: '+
+             dstr(a.booked_date)+' · '+hm(a.booked_time)+
+             (a.booked_end_time? '-'+hm(a.booked_end_time):'')+'</span>'+
+             '<span class="pick" data-cancel="'+a.booked_batch_id+'">Đổi lớp</span>';
+    } else if(a.days_left < 0){
+      tag = '<span class="tag t-full">Quá hạn</span>';
+      foot = '<span style="color:var(--text-faint)">Hết hạn xếp bù '+dstr(a.leave_deadline)+'</span>';
+    } else {
+      tag = '<span class="tag t-wait">Chưa xếp bù</span>';
+      foot = '<span class="deadline'+(a.days_left<=2?' urgent':'')+'">Còn '+a.days_left+' ngày · xếp trước '+
+             dstr(a.leave_deadline)+(a.extended?' (đã gia hạn)':'')+'</span>'+
+             '<span class="pick">Chọn lớp bù</span>';
+    }
+    return '<div class="card ab" data-abs="'+a.absence_id+'" data-open="'+(!a.booked && a.days_left>=0)+'">'+
+      '<div class="ab-top"><div>'+
+        '<div class="ab-subj">'+esc(a.subject_name||"")+(a.class_name? ' · '+esc(a.class_name):'')+'</div>'+
+        '<div class="ab-when">'+dstr(a.absent_date)+' · '+hm(a.start_time)+'–'+hm(a.end_time)+'</div>'+
+        '<div class="ab-gv">'+esc(a.teacher_name||"")+'</div>'+
+      '</div>'+tag+'</div>'+
+      '<div class="ab-foot">'+foot+'</div></div>';
+  }).join("");
+}
+
+$("#absList").addEventListener("click", async e=>{
+  const cancel = e.target.closest("[data-cancel]");
+  if(cancel){ await doCancel(cancel.dataset.cancel); return; }
+  const card = e.target.closest(".ab");
+  if(!card || card.dataset.open !== "true") return;
+  openSlots(card.dataset.abs);
+});
+
+async function openSlots(absId){
+  curAbs = absences.find(a=>a.absence_id===absId);
+  curSlot=null; filter="all"; shown=PAGE;
+  $("#filters").querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed", c.dataset.f==="all"));
+  $("#s2Title").textContent = "Lớp bù cho buổi "+(curAbs.subject_name||"")+" "+dstr(curAbs.absent_date);
+  $("#s2Sub").textContent = "Hạn học bù "+dstr(curAbs.leave_deadline);
+  $("#slotList").innerHTML = '<div class="card" style="text-align:center;color:var(--text-muted)">Đang tìm lớp trống…</div>';
+  show(step2);
+  try{
+    slots = await rpc("parent_makeup_slots", { p_token: TOKEN, p_absence_id: absId });
+  }catch(e){ toast(errText(e)); show(step1); return; }
+  if(!slots.length){ show(stEmpty); return; }
+  renderSlots();
+}
+
+function filtered(){
+  return slots.filter(s=>{
+    if(filter==="near") return s.same_location;
+    if(filter==="eve")  return s.start_time >= "17:00:00";
+    if(filter==="wknd"){ const d=new Date(s.session_date+"T00:00:00").getDay(); return d===0||d===6; }
+    return true;
+  });
+}
+
+function renderSlots(){
+  const list = filtered(), page = list.slice(0, shown);
+  $("#moreSlots").classList.toggle("hide", list.length <= shown);
+  if(!list.length){
+    $("#slotList").innerHTML='<div class="card empty"><div class="empty-t">Không có lớp khớp bộ lọc</div>'+
+      '<div class="empty-s">Bỏ bớt bộ lọc để xem thêm khung giờ khác.</div></div>';
+    return;
+  }
+  let html="", last="";
+  page.forEach((s,i)=>{
+    if(s.session_date!==last){ html+='<div class="daylabel">'+dstr(s.session_date)+'</div>'; last=s.session_date; }
+    const seat = s.max_students<=1 ? '<span class="tag t-seat">Trống</span>'
+      : '<span class="tag '+(s.free_seats<=1?'t-low':'t-seat')+'">Còn '+s.free_seats+' chỗ</span>';
+    const other = s.same_location ? '' : '<span class="tag t-other">Khác cơ sở</span>';
+    html += '<button class="card slot" data-i="'+i+'">'+
+      '<div><div class="slot-time">'+hm(s.start_time)+'</div>'+
+      '<div class="slot-dur">'+mins(s.start_time,s.end_time)+'</div></div>'+
+      '<div class="slot-body"><div class="slot-t">'+esc(s.class_name)+'</div>'+
+      '<div class="slot-m">'+esc(s.teacher_name||"")+' · '+esc(s.location_name||"")+'</div>'+
+      (s.same_location? '' : '<div class="slot-addr">'+esc(s.location_address||"")+'</div>')+
+      '</div><div class="slot-r" style="display:flex;flex-direction:column;gap:5px;align-items:flex-end">'+
+      seat+other+'</div></button>';
+  });
+  $("#slotList").innerHTML = html;
+  $("#slotList").querySelectorAll(".slot").forEach(b=>{
+    b.addEventListener("click",()=>{
+      curSlot = filtered().slice(0, shown)[+b.dataset.i];
+      $("#slotList").querySelectorAll(".slot").forEach(x=>x.classList.remove("sel"));
+      b.classList.add("sel");
+      $("#barT").textContent = dstr(curSlot.session_date)+" · "+hm(curSlot.start_time);
+      $("#barS").textContent = curSlot.class_name+" · "+(curSlot.location_name||"");
+      bar.classList.add("on");
+    });
+  });
+}
+
+$("#filters").addEventListener("click",e=>{
+  const c=e.target.closest(".chip"); if(!c) return;
+  filter=c.dataset.f; shown=PAGE; curSlot=null; bar.classList.remove("on");
+  $("#filters").querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed", x===c));
+  renderSlots();
+});
+$("#moreSlots").addEventListener("click",()=>{ shown+=PAGE; renderSlots(); });
+$("#backBtn").addEventListener("click",()=>{ show(step1); });
+$("#backTop").addEventListener("click",()=>{ show(step1); });
+$("#emptyBack").addEventListener("click",()=>{ show(step1); });
+$("#homeBtn").addEventListener("click", async ()=>{ await loadHome(); });
+
+$("#confirmBtn").addEventListener("click", async ()=>{
+  if(!curSlot || busy) return;
+  busy=true; $("#confirmBtn").disabled=true; $("#confirmBtn").textContent="Đang gửi…";
+  try{
+    await rpc("parent_book_makeup", {
+      p_token: TOKEN, p_absence_id: curAbs.absence_id,
+      p_slot_id: curSlot.slot_id, p_session_date: curSlot.session_date });
+    $("#dnWhen").textContent  = dstr(curSlot.session_date)+" · "+hm(curSlot.start_time);
+    $("#dnClass").textContent = curSlot.class_name;
+    $("#dnGv").textContent    = curSlot.teacher_name || "—";
+    $("#dnLoc").textContent   = curSlot.location_name || "—";
+    $("#dnFor").textContent   = dstr(curAbs.absent_date)+" · "+hm(curAbs.start_time);
+    absences = await rpc("parent_makeup_absences", { p_token: TOKEN });
+    renderAbs(); show(step3);
+  }catch(e){
+    toast(errText(e));
+    if(String(e.message||"").includes("SLOT_KHONG_CON_HOP_LE")) openSlots(curAbs.absence_id);
+  }finally{
+    busy=false; $("#confirmBtn").disabled=false; $("#confirmBtn").textContent="Chọn lớp này";
+  }
+});
+
+async function doCancel(batchId){
+  if(!confirm("Bỏ lựa chọn này để chọn lớp khác?")) return;
+  try{
+    await rpc("parent_cancel_makeup", { p_token: TOKEN, p_batch_id: batchId });
+    absences = await rpc("parent_makeup_absences", { p_token: TOKEN });
+    renderAbs(); toast("Đã bỏ lựa chọn. Anh/chị chọn lớp khác giúp em.");
+  }catch(e){ toast(errText(e)); }
+}
+
+/* ===================== XIN NGHỈ ===================== */
+let sessions = [], curBatch = [], curReason = null, tab = "bu";
+
+function switchTab(name){
+  tab = name;
+  document.querySelectorAll(".tabbtn").forEach(t =>
+    t.setAttribute("aria-selected", t.dataset.tab === name));
+  if (name === "pa") {
+    [step1, step2, step3, stEmpty, stBad].forEach(x => x.classList.add("hide"));
+    $("#tabNghi").classList.add("hide"); bar.classList.remove("on");
+    $("#tabPA").classList.remove("hide");
+    if (!myFeedback.length) loadFeedback();
+  } else if (name === "nghi") {
+    [step1, step2, step3, stEmpty, stBad].forEach(x => x.classList.add("hide"));
+    bar.classList.remove("on");
+    $("#tabPA").classList.add("hide");
+    $("#tabNghi").classList.remove("hide");
+    if (!sessions.length) loadSessions();
+  } else {
+    $("#tabNghi").classList.add("hide"); $("#tabPA").classList.add("hide");
+    show(step1);
+  }
+  window.scrollTo({ top: 0 });
+}
+document.querySelectorAll(".tabbtn").forEach(t =>
+  t.addEventListener("click", () => switchTab(t.dataset.tab)));
+
+async function loadSessions(){
+  $("#sesList").innerHTML = '<div class="card" style="text-align:center;color:var(--text-muted)">Đang tải lịch học…</div>';
+  try { sessions = await rpc("parent_upcoming_sessions", { p_token: TOKEN }); }
+  catch(e){ $("#sesList").innerHTML = ""; toast(errText(e)); return; }
+  // Phạm vi chọn ngày = từ hôm nay tới 30 ngày tới, KHÔNG lấy theo buổi học đầu/cuối
+  // (lấy theo buổi học sẽ khoá mất hôm nay khi hôm nay bé không có lịch).
+  ["#dateFrom", "#dateTo"].forEach(id => { $(id).min = isoAdd(0); $(id).max = isoAdd(30); });
+  renderSessions();
+}
+
+function renderSessions(){
+  const q = sessions.length ? Number(sessions[0].quota_left) : 0;
+  const qb = $("#quotaBox");
+  qb.className = "quota" + (q > 0 ? "" : " low");
+  qb.textContent = q > 0
+    ? "Còn " + q + " buổi phép trong khoá này"
+    : "Đã hết buổi phép — buổi nghỉ tiếp theo sẽ trừ vào số buổi còn lại và không được xếp bù";
+
+  // Đơn đã gửi luôn hiện, vì nút Hoàn tác mà nằm trong danh sách theo khoảng ngày
+  // thì phụ huynh phải nhớ đúng ngày đã nghỉ mới tìm lại được.
+  const leaves = sessions.filter(x => x.status_code === "nghi_co_phep" || x.status_code === "nghi_khong_phep");
+  $("#myLeaves").innerHTML = !leaves.length ? "" :
+    '<div class="sec-h" style="margin-bottom:9px;"><div class="sec-t">Đơn xin nghỉ đã gửi</div>' +
+    '<div class="sec-n">' + leaves.length + ' buổi</div></div>' +
+    leaves.map(x => {
+      const hh = Number(x.hours_left), duocBu = x.status_code === "nghi_co_phep";
+      return '<div class="card"><div class="slot" style="cursor:default">' +
+        '<div><div class="slot-time">' + hm(x.start_time) + '</div>' +
+        '<div class="slot-dur">' + dstr(x.session_date).replace("Chủ nhật","CN") + '</div></div>' +
+        '<div class="slot-body"><div class="slot-t">' + esc(x.class_name) + '</div>' +
+        '<div class="slot-m">' + esc(x.leave_reason || "") + '</div></div>' +
+        '<span class="tag ' + (duocBu ? "t-other" : "t-full") + '">' +
+        (duocBu ? "Được xếp bù" : "Không được bù") + '</span></div>' +
+        '<div class="ses-foot">' +
+        (x.source !== "phhs"
+          ? '<span style="color:var(--text-faint)">Giáo vụ đã ghi nhận</span>'
+          : hh >= 24
+            ? '<span style="color:var(--text-faint)">' + whenText(x.session_date) + '</span>' +
+              '<button class="btn-sm mute" data-undo="' + x.attendance_id + '">Hoàn tác</button>'
+            : '<span style="color:var(--text-faint)">Còn dưới 24 giờ — liên hệ giáo vụ để huỷ</span>') +
+        '</div></div>';
+    }).join("");
+
+  const f = $("#dateFrom").value, t = $("#dateTo").value || f;
+  if (!f){
+    $("#sesList").innerHTML = '<div class="card empty"><div class="empty-t">Chọn ngày con nghỉ</div>'+
+      '<div class="empty-s">Chọn một ngày, hoặc khoảng từ ngày đến ngày nếu con nghỉ nhiều buổi liên tiếp. '+
+      'Các buổi học trong khoảng đó sẽ hiện ra ngay bên dưới.</div></div>';
+    return;
+  }
+  const list = sessions.filter(s => s.session_date >= f && s.session_date <= t);
+  if (!list.length){
+    $("#sesList").innerHTML = '<div class="card empty"><div class="empty-t">Không có buổi học nào trong khoảng này</div>'+
+      '<div class="empty-s">Con không có lịch học từ ' + dstr(f) + ' đến ' + dstr(t) + '. Anh/chị thử chọn khoảng khác.</div></div>';
+    return;
+  }
+  let html = "", last = "";
+  list.forEach(s => {
+    if (s.session_date !== last){ html += '<div class="daylabel">' + dstr(s.session_date) + '</div>'; last = s.session_date; }
+    const h = Number(s.hours_left);
+    let tag, foot;
+    if (s.status_code === "nghi_co_phep" || s.status_code === "nghi_khong_phep"){
+      const duocBu = s.status_code === "nghi_co_phep";
+      tag = '<span class="tag ' + (duocBu ? "t-other" : "t-full") + '">' +
+            (duocBu ? "Đã báo nghỉ" : "Đã báo nghỉ · không bù") + '</span>';
+      foot = '<span style="color:var(--text-muted)">' + esc(s.leave_reason || "") + '</span>' +
+             (s.source !== "phhs"
+               ? '<span style="color:var(--text-faint)">Giáo vụ đã ghi nhận</span>'
+               : h >= 24
+                 ? '<button class="btn-sm mute" data-undo="' + s.attendance_id + '">Hoàn tác</button>'
+                 : '<span style="color:var(--text-faint)">Còn dưới 24 giờ — liên hệ giáo vụ để huỷ</span>');
+    } else if (s.status_code){
+      tag = '<span class="tag t-seat">' + esc(s.status_label || s.status_code) + '</span>';
+      foot = '<span style="color:var(--text-faint)">' + esc(s.location_name || "") + '</span>';
+    } else if (h < 24){
+      tag = '<span class="tag t-full">Còn ' + Math.max(0, Math.round(h)) + ' giờ</span>';
+      foot = '<span style="color:var(--red)">Báo muộn dưới 24 giờ — buổi này <b>không</b> được học bù</span>';
+    } else {
+      tag = '<span class="tag ' + (s.can_makeup ? "t-seat" : "t-low") + '">' +
+            (s.can_makeup ? "Được xếp bù" : "Không được bù") + '</span>';
+      foot = '<span style="color:var(--text-faint)">' + esc(s.location_name || "") + '</span>' +
+             (s.can_makeup ? '' : '<span style="color:var(--amber)">Đã hết buổi phép</span>');
+    }
+    html += '<div class="card"><div class="slot" style="cursor:default">' +
+      '<div><div class="slot-time">' + hm(s.start_time) + '</div>' +
+      '<div class="slot-dur">' + mins(s.start_time, s.end_time) + '</div></div>' +
+      '<div class="slot-body"><div class="slot-t">' + esc(s.class_name) +
+      (s.kind === "hoc_bu" ? ' · buổi bù' : '') + '</div>' +
+      '<div class="slot-m">' + esc(s.teacher_name || "") + ' · ' + esc(s.subject_name || "") + '</div></div>' +
+      tag + '</div><div class="ses-foot">' + foot + '</div></div>';
+  });
+  // Một nút cho cả khoảng: phụ huynh chọn lý do một lần, hệ thống gửi đơn cho mọi buổi.
+  const pending = list.filter(x => !x.status_code);
+  if (pending.length){
+    const nBu = pending.filter(x => x.can_makeup).length;
+    html += '<button class="btn btn-full" id="askAll" style="margin-top:14px;">' +
+            'Xin nghỉ ' + pending.length + ' buổi</button>' +
+            '<div style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:8px;">' +
+            (nBu === pending.length ? 'Tất cả đều được xếp bù'
+              : nBu === 0 ? 'Các buổi này không được xếp bù'
+              : nBu + '/' + pending.length + ' buổi được xếp bù') + '</div>';
+  }
+  $("#sesList").innerHTML = html;
+  const btn = $("#askAll");
+  if (btn) btn.addEventListener("click", () => openSheet(pending));
+}
+
+function daysUntil(iso){
+  // Đếm theo NGÀY LỊCH, không lấy số giờ chia 24: còn 36 giờ là "ngày mai",
+  // chia 24 rồi làm tròn sẽ ra 2 ngày.
+  const now = new Date(); const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const [y, m, d] = iso.split("-").map(Number);
+  return Math.round((new Date(y, m - 1, d) - today) / 86400000);
+}
+function whenText(iso){
+  const n = daysUntil(iso);
+  return n <= 0 ? "Buổi học hôm nay" : n === 1 ? "Buổi học ngày mai" : "Còn " + n + " ngày nữa tới buổi học";
+}
+
+function isoAdd(days){
+  // Tự ghép chuỗi theo giờ địa phương. Dùng toISOString() sẽ quy về UTC, nên trước
+  // 07:00 sáng giờ Việt Nam ngày trả về bị lùi một hôm.
+  const d = new Date(); d.setDate(d.getDate() + days);
+  const p = n => String(n).padStart(2, "0");
+  return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
+}
+$("#dateFrom").addEventListener("change", () => {
+  // Chọn ngày bắt đầu mà chưa có ngày kết thúc thì mặc định xem đúng 1 ngày đó
+  if (!$("#dateTo").value || $("#dateTo").value < $("#dateFrom").value)
+    $("#dateTo").value = $("#dateFrom").value;
+  renderSessions();
+});
+$("#dateTo").addEventListener("change", renderSessions);
+$("#rangeClear").addEventListener("click", () => {
+  $("#dateFrom").value = ""; $("#dateTo").value = ""; renderSessions();
+});
+document.querySelectorAll("[data-quick]").forEach(b => b.addEventListener("click", () => {
+  const n = Number(b.dataset.quick);
+  $("#dateFrom").value = isoAdd(0);
+  $("#dateTo").value = n === 1 ? isoAdd(0) : isoAdd(n);
+  renderSessions();
+}));
+
+document.addEventListener("click", async e => {
+  const undo = e.target.closest("[data-undo]");
+  if (undo){
+    if (!confirm("Huỷ đơn xin nghỉ này? Con sẽ đi học buổi gốc, và lớp bù đã chọn (nếu có) sẽ được gỡ.")) return;
+    try {
+      const r = await rpc("parent_cancel_leave", { p_token: TOKEN, p_attendance_id: undo.dataset.undo });
+      await loadSessions();
+      absences = await rpc("parent_makeup_absences", { p_token: TOKEN });
+      renderAbs(); updateBadge();
+      toast((r && (r.da_go_booking || r.da_go_buoi_bu))
+        ? "Đã huỷ đơn xin nghỉ và gỡ lớp bù đã chọn. Con đi học buổi gốc như bình thường."
+        : "Đã huỷ đơn xin nghỉ.");
+    } catch(err){ toast(errText(err)); }
+  }
+});
+
+let scrollLockY = 0;
+function lockScroll(){
+  scrollLockY = window.scrollY || 0;
+  document.body.style.top = (-scrollLockY) + "px";
+  document.body.classList.add("sheet-open");
+}
+function unlockScroll(){
+  document.body.classList.remove("sheet-open");
+  document.body.style.top = "";
+  window.scrollTo(0, scrollLockY);
+}
+
+function openSheet(list){
+  curBatch = list; curReason = null;
+  $("#reasons").querySelectorAll(".reason").forEach(r => r.setAttribute("aria-pressed", "false"));
+  $("#shNote").value = "";
+  const first = list[0], last = list[list.length - 1];
+  $("#shTitle").textContent = list.length === 1
+    ? "Xin nghỉ buổi " + first.class_name
+    : "Xin nghỉ " + list.length + " buổi";
+  $("#shSub").textContent = list.length === 1
+    ? dstr(first.session_date) + " · " + hm(first.start_time) + "–" + hm(first.end_time) +
+      " · " + (first.teacher_name || "")
+    : dstr(first.session_date) + " → " + dstr(last.session_date);
+
+  const nBu = list.filter(x => x.can_makeup).length, n = list.length;
+  const ok = nBu === n;
+  $("#shImpact").className = "impact " + (ok ? "ok" : "bad");
+  if (ok){
+    $("#shImpact").innerHTML = (n === 1 ? "Buổi này " : "Cả " + n + " buổi ") +
+      "<b>được xếp học bù</b>. Trung tâm giữ nguyên số buổi của con. Hạn học bù là 7 ngày kể từ mỗi buổi nghỉ.";
+  } else if (nBu === 0){
+    $("#shImpact").innerHTML = (n === 1 ? "Buổi này " : "Các buổi này ") +
+      "<b>không được xếp bù</b> (báo muộn dưới 24 giờ hoặc đã hết buổi phép) và vẫn trừ vào số buổi còn lại.";
+  } else {
+    $("#shImpact").innerHTML = "<b>" + nBu + "/" + n + " buổi được xếp học bù</b>. " +
+      (n - nBu) + " buổi còn lại không được bù và sẽ trừ vào số buổi còn lại của con.";
+  }
+  lockScroll();
+  $("#mask").classList.add("on"); $("#sheet").classList.add("on");
+  $("#sheet").scrollTop = 0;
+}
+function closeSheet(){
+  $("#mask").classList.remove("on"); $("#sheet").classList.remove("on"); unlockScroll();
+}
+$("#shClose").addEventListener("click", closeSheet);
+$("#mask").addEventListener("click", closeSheet);
+$("#reasons").addEventListener("click", e => {
+  const r = e.target.closest(".reason"); if (!r) return;
+  curReason = r.dataset.r;
+  $("#reasons").querySelectorAll(".reason").forEach(x => x.setAttribute("aria-pressed", x === r));
+});
+
+$("#shConfirm").addEventListener("click", async () => {
+  if (!curReason) return toast("Anh/chị chọn giúp em lý do nghỉ.");
+  if (busy || !curBatch.length) return;
+  busy = true; $("#shConfirm").disabled = true;
+
+  let done = 0, withMakeup = 0, failed = 0, lastErr = null;
+  for (let i = 0; i < curBatch.length; i++){
+    const ses = curBatch[i];
+    $("#shConfirm").textContent = "Đang gửi " + (i + 1) + "/" + curBatch.length + "…";
+    try {
+      const r = await rpc("parent_request_leave", {
+        p_token: TOKEN, p_slot_id: ses.slot_id, p_session_date: ses.session_date,
+        p_reason: curReason, p_note: $("#shNote").value || null });
+      done++; if (r && r.duoc_bu) withMakeup++;
+    } catch(err){ failed++; lastErr = err; }
+  }
+
+  closeSheet();
+  await loadSessions();
+  try {
+    absences = await rpc("parent_makeup_absences", { p_token: TOKEN });
+    renderAbs(); updateBadge();
+  } catch(e){}
+
+  if (done && !failed){
+    toast(withMakeup
+      ? "Đã xin nghỉ " + done + " buổi, " + withMakeup + " buổi được xếp bù. Anh/chị sang tab Buổi nghỉ & bù để chọn lớp."
+      : "Đã xin nghỉ " + done + " buổi.");
+  } else if (done && failed){
+    toast("Đã xin nghỉ " + done + " buổi, " + failed + " buổi không gửi được. " + errText(lastErr));
+  } else {
+    toast(errText(lastErr || new Error("")));
+  }
+  busy = false; $("#shConfirm").disabled = false; $("#shConfirm").textContent = "Xác nhận xin nghỉ";
+});
+
+function updateBadge(){
+  const n = absences.filter(a => !a.booked && a.days_left >= 0).length;
+  const b = $("#buCount");
+  b.textContent = n; b.classList.toggle("hide", n === 0);
+}
+
+/* ===================== PHẢN ÁNH ===================== */
+let paTopic = null, myFeedback = [];
+
+$("#paTopics").addEventListener("click", e => {
+  const b = e.target.closest(".reason"); if (!b) return;
+  paTopic = b.dataset.t;
+  $("#paTopics").querySelectorAll(".reason").forEach(x => x.setAttribute("aria-pressed", x === b));
+});
+$("#paDetail").addEventListener("input", e => {
+  const n = e.target.value.trim().length;
+  $("#paCount").textContent = n < 10 ? "Tối thiểu 10 ký tự (còn " + (10 - n) + ")" : n + " ký tự";
+});
+
+$("#paSend").addEventListener("click", async () => {
+  if (busy) return;
+  if (!paTopic) return toast("Anh/chị chọn giúp em nội dung phản ánh về việc gì.");
+  const detail = $("#paDetail").value.trim();
+  if (detail.length < 10) return toast("Anh/chị mô tả thêm giúp em, ít nhất 10 ký tự.");
+  busy = true; $("#paSend").disabled = true; $("#paSend").textContent = "Đang gửi…";
+  try {
+    const r = await rpc("parent_submit_feedback",
+      { p_token: TOKEN, p_issue_label: paTopic, p_detail: detail });
+    $("#paDetail").value = ""; $("#paCount").textContent = "Tối thiểu 10 ký tự";
+    paTopic = null;
+    $("#paTopics").querySelectorAll(".reason").forEach(x => x.setAttribute("aria-pressed", "false"));
+    await loadFeedback();
+    toast("Đã gửi phản ánh" + (r && r.code ? " (mã " + r.code + ")" : "") + ". Trung tâm sẽ phản hồi trong 24 giờ.");
+  } catch (e) { toast(errText(e)); }
+  finally { busy = false; $("#paSend").disabled = false; $("#paSend").textContent = "Gửi phản ánh"; }
+});
+
+async function loadFeedback(){
+  try { myFeedback = await rpc("parent_my_feedback", { p_token: TOKEN }); }
+  catch (e) { myFeedback = []; return; }
+  const mau = { "Đã tiếp nhận": "t-wait", "Trung tâm đang xử lý": "t-other",
+                "Đã xử lý xong": "t-done", "Đã chuyển ban quản lý xử lý": "t-other" };
+  $("#paList").innerHTML = !myFeedback.length ? "" :
+    '<div class="sec-h" style="margin-bottom:9px;"><div class="sec-t">Phản ánh đã gửi</div>' +
+    '<div class="sec-n">' + myFeedback.length + '</div></div>' +
+    myFeedback.map(f =>
+      '<div class="card"><div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start;">' +
+      '<div><div style="font-weight:600;">' + esc(f.issue_label || "Phản ánh") + '</div>' +
+      '<div style="font-size:12px;color:var(--text-faint);margin-top:2px;">' + esc(f.code || "") + ' · ' +
+      new Date(f.created_at).toLocaleDateString("vi-VN") + '</div></div>' +
+      '<span class="tag ' + (mau[f.trang_thai] || "t-wait") + '">' + esc(f.trang_thai) + '</span></div>' +
+      '<div style="font-size:13px;color:var(--text-muted);margin-top:9px;white-space:pre-wrap;">' +
+      esc(f.detail || "") + '</div>' +
+      (f.resolution
+        ? '<div style="margin-top:10px;padding-top:10px;border-top:1px dashed var(--border);font-size:13px;">' +
+          '<b style="color:var(--green);">Trung tâm phản hồi:</b> ' + esc(f.resolution) + '</div>'
+        : '') +
+      '</div>').join("");
+}
+
+/* ============ Bé học nhiều cơ sở: mỗi cơ sở một hồ sơ, đổi qua lại tại đây ============ */
+async function loadOtherRecords(){
+  let recs = [];
+  try { recs = await rpc("parent_other_records", { p_token: TOKEN }); } catch(e){ return; }
+  if (!recs || recs.length < 2) return;
+  $("#switchBar").classList.remove("hide");
+  $("#switchList").innerHTML = recs.map(r =>
+    '<button class="chip" aria-pressed="' + (r.is_current ? "true" : "false") + '"' +
+    (r.is_current ? "" : ' data-switch="' + r.token + '"') + '>' +
+    esc(r.location_name || r.code) + '</button>').join("");
+  $("#switchList").querySelectorAll("[data-switch]").forEach(b => {
+    b.addEventListener("click", () => {
+      location.href = location.pathname + "?t=" + b.dataset.switch;
+    });
+  });
+}
+
+loadHome();
+</script>
+</body>
+</html>
